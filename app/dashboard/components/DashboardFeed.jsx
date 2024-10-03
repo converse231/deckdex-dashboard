@@ -1,6 +1,8 @@
 import React from "react";
 import DashboardCard from "./DashboardCard";
 import { Clock, SquareLibrary, Star, Target, TrendingUp } from "lucide-react";
+import FeaturedCard from "./FeaturedCard";
+import PriceTrackingChart from "./PriceTrackingChart";
 
 function DashboardFeed() {
   return (
@@ -29,6 +31,8 @@ function DashboardFeed() {
         value={23}
         change={15}
       />
+      <FeaturedCard />
+      <PriceTrackingChart />
     </div>
   );
 }

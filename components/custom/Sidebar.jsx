@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import logo from "@/assets/logo-icon.png";
@@ -13,8 +15,11 @@ import {
 import { Settings, HelpCircle, User } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { usePathname } from "next/navigation";
 
 function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <div className="fixed top-0 left-0 w-[300px] h-full bg-card border-r border-border px-8 py-10 shadow-2xl flex flex-col">
       <div className="flex items-center justify-start h-fit gap-3 mb-10">
@@ -46,17 +51,24 @@ function Sidebar() {
               </div>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="flex flex-col gap-2 pl-2">
-                {group.links.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="flex items-center gap-3 text-foreground hover:bg-accent hover:text-primary transition-colors duration-200 py-2 px-4 rounded"
-                  >
-                    <link.icon className="w-5 h-5" />
-                    <span>{link.name}</span>
-                  </Link>
-                ))}
+              <div className="flex flex-col gap-1 pl-2">
+                {group.links.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className={`flex items-center gap-3 text-foreground hover:bg-accent hover:text-primary transition-colors duration-200 py-2 px-4 rounded ${
+                        isActive
+                          ? "border-l-4 border-primary bg-accent text-primary"
+                          : "border-l-4 border-transparent"
+                      }`}
+                    >
+                      <link.icon className="w-5 h-5" />
+                      <span>{link.name}</span>
+                    </Link>
+                  );
+                })}
               </div>
             </AccordionContent>
           </AccordionItem>
