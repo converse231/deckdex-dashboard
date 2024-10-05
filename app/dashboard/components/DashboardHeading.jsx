@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import Image from "next/image";
 import React from "react";
+import collectionLogo from "@/assets/pokemon-tcg-logo.png";
 
 function DashboardHeading() {
   return (
@@ -12,11 +14,13 @@ function DashboardHeading() {
         </p>
       </div>
       <div className="flex gap-4">
-        <Button size="lg" variant="outline">
-          Export Data{" "}
-          <Download className="h-4 w-4 text-muted-foreground ml-2" />
-        </Button>
-        <Button size="lg">Create Report</Button>
+        <Image
+          src={collectionLogo}
+          height={100}
+          width={300}
+          alt="Pokemon tcg logo"
+          className="h-20 w-full"
+        />
       </div>
     </div>
   );
