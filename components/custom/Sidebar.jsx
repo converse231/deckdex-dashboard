@@ -53,7 +53,7 @@ function Sidebar() {
             <AccordionContent>
               <div className="flex flex-col gap-1 pl-2">
                 {group.links.map((link) => {
-                  const isActive = pathname === link.href;
+                  const isActive = pathname.includes(link.href);
                   return (
                     <Link
                       key={link.name}
