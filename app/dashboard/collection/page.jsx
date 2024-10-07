@@ -5,8 +5,12 @@ import Image from "next/image";
 import CollectionsSelect from "./components/CollectionsSelect";
 import CollectionCard from "./components/CollectionCard";
 import { COLLECTIONS } from "@/lib/constants";
+import { fetchPokemonSets } from "./lib/data";
 
-function CollectionsPage() {
+async function CollectionsPage() {
+  const data = await fetchPokemonSets();
+  const pokemonSets = data?.data || [];
+
   return (
     <section>
       <div className="flex justify-between items-center pb-10">
@@ -18,9 +22,14 @@ function CollectionsPage() {
         </div>
       </div>
       <div>
-        {COLLECTIONS.map((col, index) => (
-          <CollectionCard key={index} data={col} />
-        ))}
+        <CollectionCard
+          title="Pokemon TCG"
+          description={
+            "The Pokémon TCG lets you collect, trade, and build powerful decks for thrilling battles! With rare cards, unique artwork, and special editions, it’s perfect for collectors who love discovering and showcasing their favorite Pokémon."
+          }
+          logo={pokemonTcgLogo}
+          data={pokemonSets}
+        />
       </div>
     </section>
   );

@@ -7,10 +7,8 @@ import sampleCard from "@/assets/sample-card.png";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Check, Forward, Heart, Plus, Share } from "lucide-react";
 
-function CardComponent() {
+function CardComponent({ card }) {
   const [isOwned, setIsOwned] = useState(false);
-
-  console.log(isOwned);
   return (
     <Card
       className={`${
@@ -18,11 +16,11 @@ function CardComponent() {
       } h-[400px] w-72 flex justify-center items-center relative group rounded-3xl`}
     >
       <Image
-        src={sampleCard}
+        src={card?.images?.large}
         alt="sample-card"
         height={400}
         width={320}
-        className={`w-auto transition-all duration-300 rounded-2xl ${
+        className={`w-auto transition-all duration-150 rounded-2xl ${
           isOwned
             ? "opacity-100 border-none h-full"
             : "opacity-40 border-dashed border-4 h-[330px]"

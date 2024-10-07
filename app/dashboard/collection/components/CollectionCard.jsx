@@ -7,18 +7,16 @@ import Image from "next/image";
 import SetDialog from "./SetDialog";
 import CollectionTabs from "../[set]/components/CollectionTabs";
 
-function CollectionCard({ data }) {
+function CollectionCard({ title, description, logo, data }) {
   return (
     <Card className="bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl w-full min-h-[300px] p-10 shadow flex flex-col justify-between relative">
       <div className="flex flex-col gap-3">
-        <h1 className="text-heading-1">{data.title || "Collection Name"}</h1>
-        <p className="max-w-3xl">
-          {data.description || "Collection description"}
-        </p>
+        <h1 className="text-heading-1">{title}</h1>
+        <p className="max-w-3xl">{description}</p>
       </div>
-      <SetDialog data={data.sets} />
+      <SetDialog data={data} />
       <Image
-        src={data.logo}
+        src={logo}
         alt="pokemon-logo"
         width={1000}
         height={600}

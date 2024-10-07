@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import pokemonTcgLogo from "@/assets/pokemon-tcg-logo.png";
 import { format } from "date-fns";
 import { formatParams } from "@/lib/formatters";
 import SetDialog from "../components/SetDialog";
@@ -8,44 +7,63 @@ import { COLLECTIONS } from "@/lib/constants";
 import CollectionTabs from "./components/CollectionTabs";
 import CardFeed from "./components/CardFeed";
 import CollectionStatus from "./components/CollectionStatus";
+import { fetchCards, fetchSetAndCards, fetchSetById } from "./lib/data";
+import { Skeleton } from "@/components/ui/skeleton";
 
-function SetPage({ params }) {
-  const setName = formatParams(params.set) || "Set Name";
+async function SetPage({ params, searchParams }) {
+  const setId = params.set || "Stellar Crown";
+  const subType = searchParams.subType || null;
+  const rarity = searchParams.rarity || null;
+  const superType = searchParams.superType || null;
   const sets = COLLECTIONS[0].sets;
-
-  console.log(setName);
+  const set = await fetchSetById(setId);
+  const cards = await fetchCards(setId, subType);
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="h-[300px] w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-2xl p-8 flex flex-col justify-between relative">
-        <div className="flex flex-col gap-5">
-          <h1 className="text-heading-1">{setName}</h1>
-          <p className="text-p max-w-3xl">
-            Meet some of the new Pokémon from Area Zero as they make their
-            Pokémon TCG debut. Pokémon like Iron Boulder and Raging Bolt are
-            powering their way into the compelling and competitive world of the
-            Pokémon TCG courtesy of the Pokémon TCG: Scarlet & Violet—Stellar
-            Crown expansion.
-          </p>
+    <>
+      <div className="flex flex-col gap-10">
+        <div className="h-[300px] w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-2xl p-8 flex flex-col justify-between relative">
+          <div className="flex flex-col gap-5">
+            <h1 className="text-heading-1">{set?.name || setName}</h1>
+            <div className="flex flex-col">
+              <p>
+                Series:{" "}
+                <span className="font-semibold">{set?.series || "Series"}</span>
+              </p>
+              <div className="flex items-center gap-2">
+                <p>Symbol: </p>
+                <Image
+                  src={set?.images.symbol}
+                  alt={set?.ptcgoCode}
+                  height={30}
+                  width={50}
+                  className="h-8 w-auto"
+                />
+              </div>
+              <p>
+                Release Date: <span>{set?.releaseDate || "Release Date"}</span>
+              </p>
+            </div>
+          </div>
+          <SetDialog data={sets} />
+          {set?.images?.logo && (
+            <Image
+              src={set.images.logo}
+              alt={`${set.name} logo`}
+              width={400}
+              height={200}
+              quality={100}
+              className="absolute right-10 top-14 w-auto h-[200px]"
+            />
+          )}
         </div>
-        <SetDialog data={sets} />
-        <Image
-          src={
-            "https://tcg.pokemon.com/assets/img/sv-expansions/stellar-crown/logo/en-us/sv7-logo.png"
-          }
-          alt="pokemon-logo"
-          width={1000}
-          height={600}
-          quality={100}
-          className="absolute right-10 top-16 w-[400px] h-auto"
-        />
+        <div className="flex justify-between items-center">
+          <CollectionTabs setId={setId} />
+          <CollectionStatus cards={cards} />
+        </div>
+        <CardFeed cards={cards} />
       </div>
-      <div className="flex justify-between items-center">
-        <CollectionTabs />
-        <CollectionStatus />
-      </div>
-      <CardFeed />
-    </div>
+    </>
   );
 }
 
