@@ -5,7 +5,6 @@ import React from "react";
 
 import Image from "next/image";
 import SetDialog from "./SetDialog";
-import CollectionTabs from "../[set]/components/CollectionTabs";
 
 function CollectionCard({ title, description, logo, data }) {
   return (

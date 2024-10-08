@@ -1,23 +1,29 @@
 import Image from "next/image";
 import React from "react";
-import { format } from "date-fns";
-import { formatParams } from "@/lib/formatters";
+
 import SetDialog from "../components/SetDialog";
 import { COLLECTIONS } from "@/lib/constants";
-import CollectionTabs from "./components/CollectionTabs";
 import CardFeed from "./components/CardFeed";
 import CollectionStatus from "./components/CollectionStatus";
 import { fetchCards, fetchSetAndCards, fetchSetById } from "./lib/data";
 import { Skeleton } from "@/components/ui/skeleton";
+import SubtypeDropdown from "./components/SubtypeDropdown";
+import RarityDropdown from "./components/RarityDropdown";
+import TypeDropdown from "./components/TypeDropdown";
+import SortByButton from "./components/SortByButton";
+import ResetFiltersButton from "./components/ResetFiltersButton";
 
 async function SetPage({ params, searchParams }) {
   const setId = params.set || "Stellar Crown";
   const subType = searchParams.subType || null;
   const rarity = searchParams.rarity || null;
+  const type = searchParams.type || null;
   const superType = searchParams.superType || null;
+  const sort = searchParams.sort || null;
+  const order = searchParams.order || null;
   const sets = COLLECTIONS[0].sets;
   const set = await fetchSetById(setId);
-  const cards = await fetchCards(setId, subType);
+  const cards = await fetchCards(setId, subType, rarity, type, sort, order);
 
   return (
     <>
@@ -43,6 +49,7 @@ async function SetPage({ params, searchParams }) {
               <p>
                 Release Date: <span>{set?.releaseDate || "Release Date"}</span>
               </p>
+              <CollectionStatus cards={cards} />
             </div>
           </div>
           <SetDialog data={sets} />
@@ -58,8 +65,13 @@ async function SetPage({ params, searchParams }) {
           )}
         </div>
         <div className="flex justify-between items-center">
-          <CollectionTabs setId={setId} />
-          <CollectionStatus cards={cards} />
+          <div className="flex gap-2 items-center">
+            <TypeDropdown setId={setId} />
+            <SubtypeDropdown setId={setId} />
+            <RarityDropdown setId={setId} />
+            <ResetFiltersButton />
+          </div>
+          <SortByButton />
         </div>
         <CardFeed cards={cards} />
       </div>
