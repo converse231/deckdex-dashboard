@@ -17,7 +17,7 @@ function CardComponent({ card }) {
       } h-[400px] w-72 flex justify-center items-center relative group rounded-3xl`}
     >
       <Image
-        src={card?.images?.large}
+        src={card?.images?.small}
         alt="sample-card"
         height={400}
         width={320}
