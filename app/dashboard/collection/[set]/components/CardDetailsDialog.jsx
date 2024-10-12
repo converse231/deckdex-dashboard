@@ -81,14 +81,13 @@ function CardDetailsDialog({ card }) {
           <ScanEye className="h-6 w-6 hover:opacity-50 transition-all duration-200" />
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[980px] p-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <DialogContent className="lg:max-w-[980px] max-w-[850px] h-[80%] md:h-auto sm:h-fit overflow-y-auto p-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <img
             src={card.images.large}
             alt={card.name}
-            className="w-auto h-full rounded-lg shadow-lg"
+            className="w-auto md:h-full sm:h-fit my-auto rounded-lg shadow-lg justify-self-center"
           />
-
           <ScrollArea className="max-h-[710px] w-full rounded-md px-3 py-8">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
