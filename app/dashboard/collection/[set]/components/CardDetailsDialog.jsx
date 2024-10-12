@@ -81,14 +81,17 @@ function CardDetailsDialog({ card }) {
           <ScanEye className="h-6 w-6 hover:opacity-50 transition-all duration-200" />
         </div>
       </DialogTrigger>
-      <DialogContent className="lg:max-w-[980px] max-w-[850px] h-[80%] md:h-auto sm:h-fit overflow-y-auto px-8 md:p-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <img
-            src={card.images.large}
-            alt={card.name}
-            className="w-auto md:h-full sm:h-fit my-auto rounded-lg shadow-lg justify-self-center"
-          />
-          <ScrollArea className="max-h-[710px] w-full rounded-md px-0 md:px-3 md:py-8 py-2">
+      <DialogContent className="max-h-[80%] md:max-h-[80%] md:max-w-[90%] lg:max-w-[900px] overflow-y-auto px-8 md:p-0">
+        <div className="grid grid-cols-1 md:flex gap-4 md:items-stretch">
+          <div className="md:w-1/2 sm:self-center md:h-full">
+            <img
+              src={card.images.large}
+              alt={card.name}
+              className="md:h-full"
+            />
+          </div>
+
+          <ScrollArea className="lg:max-h-[710px] md:h-[550px] lg:h-[620px] h-fit rounded-md px-0 md:px-3 md:py-8 py-2 md:w-1/2">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
                 <h2 className="text-heading-2">{card.name || "Card name"}</h2>
@@ -98,7 +101,10 @@ function CardDetailsDialog({ card }) {
                   </p>
                 )}
               </div>
-              <div className="grid grid-cols-2">
+              <div
+                className="grid grid-cols-2 md:grid-cols-1
+              "
+              >
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-1 items-center">
                     <p className="text-muted-foreground text-sm">Rarity:</p>

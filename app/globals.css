@@ -82,7 +82,7 @@ body {
   @apply text-[20px] font-semibold leading-[28px];
 }
 .text-p {
-  @apply text-[16px] font-normal leading-[28px];
+  @apply text-[16px] font-normal;
 }
 .text-quote {
   @apply text-[16px] font-normal italic leading-[24px];
