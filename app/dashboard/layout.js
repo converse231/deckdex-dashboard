@@ -8,7 +8,7 @@ function layout({ children }) {
     <TooltipProvider>
       <main>
         <Sidebar />
-        <section className="flex-1 bg-background lg:ml-[300px] mt-16 lg:mt-0 px-10 py-12 min-h-screen">
+        <section className="flex-1 bg-background lg:ml-[300px] md:mt-16 mt-12 lg:mt-0 md:px-10 px-5 py-12 min-h-screen">
           {children}
           <Toaster />
         </section>

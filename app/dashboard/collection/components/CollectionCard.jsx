@@ -8,10 +8,10 @@ import SetDialog from "./SetDialog";
 
 function CollectionCard({ title, description, logo, data }) {
   return (
-    <Card className="bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl w-full min-h-[300px] p-10 shadow flex flex-col justify-between relative">
-      <div className="flex flex-col gap-3">
+    <Card className="bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl w-full min-h-[300px] md:p-10 p-6 shadow flex flex-col justify-between relative">
+      <div className="flex flex-col md:gap-3 gap-1">
         <h1 className="text-heading-1">{title}</h1>
-        <p className="max-w-3xl">{description}</p>
+        <p className="2xl:max-w-3xl max-w-[600px]">{description}</p>
       </div>
       <SetDialog data={data} />
       <Image
@@ -20,7 +20,7 @@ function CollectionCard({ title, description, logo, data }) {
         width={1000}
         height={600}
         quality={100}
-        className="absolute right-20 top-10 w-[350px] h-auto"
+        className="absolute 2xl:right-20 right-10 top-10 md:w-[350px] hidden xl:block h-auto"
       />
     </Card>
   );

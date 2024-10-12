@@ -27,20 +27,23 @@ function Sidebar() {
   return (
     <>
       {/* Mobile menu button */}
-      <Button
-        variant="outline"
-        size="icon"
-        className="fixed top-4 left-4 z-50 md:hidden"
-        onClick={toggleSidebar}
-      >
-        {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-      </Button>
+      <div className="flex w-full justify-between items-center fixed px-5 z-10 top-0 py-5 border-b bg-background lg:hidden">
+        <h3 className="text-heading-3">Deckdex</h3>
+        <Button
+          variant="ghost"
+          size="icon"
+          className=" "
+          onClick={toggleSidebar}
+        >
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </Button>
+      </div>
 
       {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 w-[300px] h-full bg-card border-r border-border px-8 py-10 shadow-2xl flex flex-col transition-transform duration-300 ease-in-out transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 z-40`}
+        } lg:translate-x-0 z-40`}
       >
         <div className="flex items-center justify-start h-fit gap-3 mb-10">
           <Image

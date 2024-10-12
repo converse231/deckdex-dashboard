@@ -70,7 +70,7 @@ body {
 }
 
 .text-heading-1 {
-  @apply text-[48px] font-extrabold leading-[48px];
+  @apply md:text-[48px] text-[36px] font-extrabold leading-[48px];
 }
 .text-heading-2 {
   @apply text-[30px] font-semibold leading-[36px];

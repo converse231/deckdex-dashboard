@@ -14,7 +14,7 @@ export default function Loading() {
           </div>
         </div>
         <Skeleton className="h-10 w-32 bg-white/20" />
-        <Skeleton className="absolute right-10 top-16 w-[350px] h-[180px] bg-white/20" />
+        <Skeleton className="absolute right-10 top-16 w-[350px] h-[180px] bg-white/20 lg:block hidden" />
       </div>
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
@@ -22,7 +22,7 @@ export default function Loading() {
             <Skeleton key={i} className="h-10 w-24 bg-gray-500" />
           ))}
         </div>
-        <Skeleton className="h-10 w-48 bg-gray-500" />
+        <Skeleton className="h-10 w-48 bg-gray-500 " />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-5 justify-items-center">
         {[...Array(12)].map((_, i) => (

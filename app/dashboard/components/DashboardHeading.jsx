@@ -6,7 +6,7 @@ import collectionLogo from "@/assets/pokemon-tcg-logo.png";
 
 function DashboardHeading() {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between md:items-center items-start flex-col md:flex-row">
       <div>
         <h2 className="text-heading-2">Hello, John Doe</h2>
         <p className="text-p text-muted-foreground">

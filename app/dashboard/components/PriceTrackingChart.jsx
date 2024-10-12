@@ -41,7 +41,7 @@ const chartConfig = {
 
 function PriceTrackingChart() {
   return (
-    <Card className="col-span-2">
+    <Card className="lg:col-span-2 col-span-1">
       <CardHeader>
         <CardTitle>Area Chart - Gradient</CardTitle>
         <CardDescription>

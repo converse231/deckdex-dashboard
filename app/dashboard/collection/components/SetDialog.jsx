@@ -67,7 +67,7 @@ function SetDialog() {
             />
             <Search className="icon-button absolute right-3 top-0 translate-y-1/2" />
           </div>
-          <div className="overflow-y-auto max-h-[520px] grid grid-cols-4 items-center justify-items-center gap-3 py-10">
+          <div className="overflow-y-auto max-h-[520px] grid md:grid-cols-4 grid-cols-3 items-center justify-items-center md:gap-3 gap-2 md:py-10 py-6">
             {isLoading && <p>Loading sets...</p>}
             {isError && <p>Error loading sets. Please try again.</p>}
             {filteredSets.map((set) => (

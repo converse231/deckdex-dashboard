@@ -26,60 +26,58 @@ async function SetPage({ params, searchParams }) {
   const cards = await fetchCards(setId, subType, rarity, type, sort, order);
 
   return (
-    <>
-      <div className="flex flex-col gap-6 sm:gap-8 md:gap-10">
-        <div className="h-auto sm:h-[300px] w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between relative">
-          <div className="flex flex-col gap-3 sm:gap-4 md:gap-5">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-1 font-bold">
-              {set?.name || setName}
-            </h1>
-            <div className="flex flex-col gap-1 sm:gap-2">
-              <p className="text-sm sm:text-base">
-                Series:{" "}
-                <span className="font-semibold">{set?.series || "Series"}</span>
-              </p>
-              <div className="flex items-center gap-2">
-                <p className="text-sm sm:text-base">Symbol: </p>
-                <Image
-                  src={set?.images.symbol}
-                  alt={set?.ptcgoCode}
-                  height={30}
-                  width={50}
-                  className="h-6 sm:h-8 w-auto"
-                />
-              </div>
-              <p className="text-sm sm:text-base">
-                Release Date: <span>{set?.releaseDate || "Release Date"}</span>
-              </p>
-              <CollectionStatus cards={cards} />
+    <div className="flex flex-col gap-6 sm:gap-8 md:gap-10">
+      <div className="h-auto sm:h-[300px] w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between relative">
+        <div className="flex flex-col gap-3 md:gap-5">
+          <h1 className="text-3xl md:text-4xl lg:text-heading-1 font-bold">
+            {set?.name || setName}
+          </h1>
+          <div className="flex flex-col gap-0 md:gap-2">
+            <p className="text-sm sm:text-base">
+              Series:{" "}
+              <span className="font-semibold">{set?.series || "Series"}</span>
+            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm sm:text-base">Symbol: </p>
+              <Image
+                src={set?.images.symbol}
+                alt={set?.ptcgoCode}
+                height={30}
+                width={50}
+                className="h-6 sm:h-8 w-auto"
+              />
             </div>
+            <p className="text-sm sm:text-base">
+              Release Date: <span>{set?.releaseDate || "Release Date"}</span>
+            </p>
+            <CollectionStatus cards={cards} />
           </div>
-          <div className="mt-4 sm:mt-0">
-            <SetDialog data={sets} />
-          </div>
-          {set?.images?.logo && (
-            <Image
-              src={set.images.logo}
-              alt={`${set.name} logo`}
-              width={400}
-              height={200}
-              quality={100}
-              className="hidden sm:block absolute right-4 sm:right-6 md:right-10 top-4 sm:top-8 md:top-14 w-auto h-[100px] sm:h-[150px] md:h-[200px]"
-            />
-          )}
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-2">
-          <div className="flex flex-wrap gap-2 items-center">
-            <TypeDropdown setId={setId} />
-            <SubtypeDropdown setId={setId} />
-            <RarityDropdown setId={setId} />
-            <ResetFiltersButton />
-          </div>
-          <SortByButton />
+        <div className="mt-4 sm:mt-0">
+          <SetDialog data={sets} />
         </div>
-        <CardFeed cards={cards} />
+        {set?.images?.logo && (
+          <Image
+            src={set.images.logo}
+            alt={`${set.name} logo`}
+            width={400}
+            height={200}
+            quality={100}
+            className="hidden sm:block absolute right-4 sm:right-6 md:right-10 top-4 sm:top-8 md:top-14 w-auto h-[100px] sm:h-[150px] md:h-[200px]"
+          />
+        )}
       </div>
-    </>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-2">
+        <div className="flex flex-wrap gap-2 items-center">
+          <TypeDropdown setId={setId} />
+          <SubtypeDropdown setId={setId} />
+          <RarityDropdown setId={setId} />
+          <ResetFiltersButton />
+        </div>
+        <SortByButton />
+      </div>
+      <CardFeed cards={cards} />
+    </div>
   );
 }
 

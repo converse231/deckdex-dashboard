@@ -7,7 +7,7 @@ import CollectionsCard from "./CollectionsCard";
 
 function DashboardFeed() {
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="md:grid md:grid-cols-2 lg:grid-cols-4 flex flex-col gap-4">
       <DashboardCard
         title="Total Cards"
         Icon={SquareLibrary}
