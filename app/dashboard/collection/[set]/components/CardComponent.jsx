@@ -17,7 +17,7 @@ export default function CardComponent({ card }) {
       } w-full max-w-[250px] md:max-w-[280px] lg:max-w-[200px] xl:max-w-[300px] h-[220px] lg:h-[220px] xl:h-[250px] 2xl:h-[420px] flex justify-center items-center relative group lg:rounded-2xl rounded-xl mx-auto`}
     >
       <Image
-        src={card?.images?.large}
+        src={card?.images?.small}
         alt="sample-card"
         height={400}
         width={320}

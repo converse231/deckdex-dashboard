@@ -38,7 +38,7 @@ export default function RarityDropdown({ setId }) {
     if (value.toLowerCase() === "all") {
       params.delete("rarity");
     } else {
-      params.set("rarity", value.toLowerCase());
+      params.set("rarity", value?.toLowerCase());
     }
     router.push(`?${params.toString()}`);
   };
@@ -50,7 +50,7 @@ export default function RarityDropdown({ setId }) {
       </SelectTrigger>
       <SelectContent>
         {filters.map((filter, index) => (
-          <SelectItem key={index} value={filter.toLowerCase()}>
+          <SelectItem key={index} value={filter?.toLowerCase()}>
             {filter === "all" ? "See all" : filter || "Filter Name"}
           </SelectItem>
         ))}

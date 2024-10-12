@@ -27,7 +27,7 @@ async function SetPage({ params, searchParams }) {
 
   return (
     <div className="flex flex-col gap-6 sm:gap-8 md:gap-10">
-      <div className="h-auto sm:h-[300px] w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-2xl p-4 sm:p-6 md:p-8 flex justify-between items-center">
+      <div className="h-auto sm:h-[300px] w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-2xl p-4 sm:p-6 md:p-8 flex sm:flex-row flex-col-reverse sm:justify-between gap-5 sm:gap-0 items-center">
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-3 md:gap-2">
             <h1 className="text-3xl md:text-4xl lg:text-heading-1 font-bold">
@@ -58,7 +58,6 @@ async function SetPage({ params, searchParams }) {
             <SetDialog data={sets} />
           </div>
         </div>
-
         {set?.images?.logo && (
           <Image
             src={set.images.logo}

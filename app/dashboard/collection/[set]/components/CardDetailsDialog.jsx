@@ -20,32 +20,33 @@ const getRarityStars = (rarity) => {
       return 1;
     case "Uncommon":
       return 1.5;
-    case "Double Rare":
-      return 2.5; // Added "Double Rare"
     case "Rare":
       return 2;
+    case "Double Rare":
+      return 2.5;
+    case "Promo":
     case "Rare Holo":
       return 3;
+    case "Trainer Gallery Rare Holo":
     case "Rare Holo V":
+    case "Rare Holo EX":
       return 3.5;
     case "Rare Holo VMAX":
       return 4;
     case "Rare Holo VSTAR":
+    case "ACE SPEC Rare":
       return 4.5;
     case "Rare Ultra":
     case "Ultra Rare":
-      return 5; // "Ultra Rare" mapped to similar stars as "Rare Ultra"
     case "Radiant Rare":
     case "Rare Secret":
-      return 5;
-    case "ACE SPEC Rare":
-      return 4.5; // Rare special item-like cards (ACE SPEC)
     case "Illustration Rare":
-      return 5; // Similar to Secret Rare tier due to special illustrations
+    case "Rare Shining":
+      return 5;
     case "Special Illustration Rare":
-      return 5.5; // Higher than regular Illustration Rare
+      return 5.5;
     case "Hyper Rare":
-      return 6; // Considered more rare than Ultra and Secret Rares
+      return 6;
     default:
       return 0; // Default case for unrecognized rarity
   }
@@ -102,7 +103,7 @@ function CardDetailsDialog({ card }) {
                 )}
               </div>
               <div
-                className="grid grid-cols-2 md:grid-cols-1
+                className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2
               "
               >
                 <div className="flex flex-col gap-2">
@@ -182,7 +183,7 @@ function CardDetailsDialog({ card }) {
               <Separator className="my-1" />
               <div className="flex flex-col gap-2">
                 <h4 className="text-heading-4">Markets</h4>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 md:grid-cols-1 md:gap-3 lg:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     {card?.cardmarket?.prices?.averageSellPrice && (
                       <div className="flex items-center gap-1">
