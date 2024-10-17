@@ -48,9 +48,9 @@ export default function CardComponent({ card }) {
       </Card>
 
       <motion.div
-        className="absolute flex flex-col items-center justify-between gap-1 sm:gap-8 h-full py-4 sm:py-6 right-1 sm:right-2 top-0"
+        className="absolute flex flex-col items-center justify-between gap-1 sm:gap-8 h-full py-4 sm:py-6 right-1 sm:right-2 top-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
         variants={{
-          hidden: { opacity: 1, x: 0 }, // Changed to always be visible
+          hidden: { opacity: 0, x: 20 },
           visible: { opacity: 1, x: 0 },
         }}
         transition={{ duration: 0.2 }}
@@ -61,7 +61,7 @@ export default function CardComponent({ card }) {
             <motion.button
               onClick={debouncedHandleLike}
               aria-label={isLiked ? "Unlike card" : "Like card"}
-              className="focus:outline-none "
+              className="focus:outline-none"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -81,7 +81,7 @@ export default function CardComponent({ card }) {
 
             <motion.button
               aria-label="Share card"
-              className="focus:outline-none "
+              className="focus:outline-none"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -91,7 +91,7 @@ export default function CardComponent({ card }) {
             <motion.button
               onClick={debouncedHandleBookmark}
               aria-label={isBookmarked ? "Remove bookmark" : "Bookmark card"}
-              className="focus:outline-none "
+              className="focus:outline-none"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
