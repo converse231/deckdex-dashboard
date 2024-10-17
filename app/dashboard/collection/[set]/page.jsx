@@ -12,6 +12,7 @@ import RarityDropdown from "./components/RarityDropdown";
 import TypeDropdown from "./components/TypeDropdown";
 import SortByButton from "./components/SortByButton";
 import ResetFiltersButton from "./components/ResetFiltersButton";
+import ClearViewToggle from "./components/ClearViewToggle";
 
 async function SetPage({ params, searchParams }) {
   const setId = params.set || "Stellar Crown";
@@ -75,6 +76,7 @@ async function SetPage({ params, searchParams }) {
           <SubtypeDropdown setId={setId} />
           <RarityDropdown setId={setId} />
           <ResetFiltersButton />
+          <ClearViewToggle />
         </div>
         <SortByButton />
       </div>

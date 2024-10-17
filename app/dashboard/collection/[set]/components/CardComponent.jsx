@@ -6,8 +6,12 @@ import { Bookmark, Check, Forward, Heart, Plus } from "lucide-react";
 import CardDetailsDialog from "./CardDetailsDialog";
 import { useDebounce } from "use-debounce";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
 export default function CardComponent({ card }) {
+  const searchParams = useSearchParams();
+  const isClearView = searchParams.get("clearView") === "true";
+
   const [isOwned, setIsOwned] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -47,102 +51,106 @@ export default function CardComponent({ card }) {
         />
       </Card>
 
-      <motion.div
-        className="absolute flex flex-col items-center justify-between gap-1 sm:gap-8 h-full py-4 sm:py-6 right-1 sm:right-2 top-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
-        variants={{
-          hidden: { opacity: 0, x: 20 },
-          visible: { opacity: 1, x: 0 },
-        }}
-        transition={{ duration: 0.2 }}
-      >
-        <CardDetailsDialog card={card} />
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex flex-col gap-1">
-            <motion.button
-              onClick={debouncedHandleLike}
-              aria-label={isLiked ? "Unlike card" : "Like card"}
-              className="focus:outline-none"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                animate={{ scale: isLiked ? [1, 1.2, 1] : 1 }}
-                transition={{ duration: 0.2 }}
+      {!isClearView && (
+        <motion.div
+          className="absolute flex flex-col items-center justify-between gap-1 sm:gap-8 h-full py-4 sm:py-6 right-1 sm:right-2 top-0"
+          variants={{
+            hidden: { opacity: 0, x: 20 },
+            visible: { opacity: 1, x: 0 },
+          }}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.2 }}
+        >
+          <CardDetailsDialog card={card} />
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col gap-1">
+              <motion.button
+                onClick={debouncedHandleLike}
+                aria-label={isLiked ? "Unlike card" : "Like card"}
+                className="focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <Heart
-                  fill={isLiked ? "#E02424" : "none"}
-                  className={`h-5 w-5 cursor-pointer ${
-                    isLiked ? "text-red-600" : ""
-                  }`}
-                  strokeWidth={2.5}
-                />
-              </motion.div>
-            </motion.button>
-
-            <motion.button
-              aria-label="Share card"
-              className="focus:outline-none"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Forward className="h-5 w-5" strokeWidth={2.5} />
-            </motion.button>
-
-            <motion.button
-              onClick={debouncedHandleBookmark}
-              aria-label={isBookmarked ? "Remove bookmark" : "Bookmark card"}
-              className="focus:outline-none"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                animate={{ scale: isBookmarked ? [1, 1.2, 1] : 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Bookmark
-                  fill={isBookmarked ? "#facc15" : "none"}
-                  className={`h-5 w-5 cursor-pointer ${
-                    isBookmarked ? "text-yellow-300" : ""
-                  }`}
-                  strokeWidth={2.5}
-                />
-              </motion.div>
-            </motion.button>
-          </div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.1 }}
-          >
-            <Button
-              onClick={() => setIsOwned(!isOwned)}
-              className="rounded-full text-white h-10 w-10 p-0"
-              aria-label={
-                isOwned ? "Remove from collection" : "Add to collection"
-              }
-            >
-              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={isOwned ? "owned" : "not-owned"}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{
-                    duration: 0.15,
-                    rotate: { type: "spring", stiffness: 300, damping: 15 },
-                  }}
+                  animate={{ scale: isLiked ? [1, 1.2, 1] : 1 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {isOwned ? (
-                    <Check className="h-5 w-5" />
-                  ) : (
-                    <Plus className="h-5 w-5" />
-                  )}
+                  <Heart
+                    fill={isLiked ? "#E02424" : "none"}
+                    className={`h-5 w-5 cursor-pointer ${
+                      isLiked ? "text-red-600" : ""
+                    }`}
+                    strokeWidth={2.5}
+                  />
                 </motion.div>
-              </AnimatePresence>
-            </Button>
-          </motion.div>
-        </div>
-      </motion.div>
+              </motion.button>
+
+              <motion.button
+                aria-label="Share card"
+                className="focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Forward className="h-5 w-5" strokeWidth={2.5} />
+              </motion.button>
+
+              <motion.button
+                onClick={debouncedHandleBookmark}
+                aria-label={isBookmarked ? "Remove bookmark" : "Bookmark card"}
+                className="focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <motion.div
+                  animate={{ scale: isBookmarked ? [1, 1.2, 1] : 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Bookmark
+                    fill={isBookmarked ? "#facc15" : "none"}
+                    className={`h-5 w-5 cursor-pointer ${
+                      isBookmarked ? "text-yellow-300" : ""
+                    }`}
+                    strokeWidth={2.5}
+                  />
+                </motion.div>
+              </motion.button>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.1 }}
+            >
+              <Button
+                onClick={() => setIsOwned(!isOwned)}
+                className="rounded-full text-white h-10 w-10 p-0"
+                aria-label={
+                  isOwned ? "Remove from collection" : "Add to collection"
+                }
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={isOwned ? "owned" : "not-owned"}
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{
+                      duration: 0.15,
+                      rotate: { type: "spring", stiffness: 300, damping: 15 },
+                    }}
+                  >
+                    {isOwned ? (
+                      <Check className="h-5 w-5" />
+                    ) : (
+                      <Plus className="h-5 w-5" />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </Button>
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }

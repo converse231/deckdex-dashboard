@@ -26,6 +26,11 @@ export default function SubtypeDropdown({ setId }) {
   } = useQuery({
     queryKey: ["subtypes", setId],
     queryFn: () => fetchUniqueSubtypes(setId),
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   if (isLoading) return <Skeleton className="w-[140px] h-9 bg-secondary" />;

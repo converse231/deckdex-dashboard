@@ -26,6 +26,11 @@ export default function TypeDropdown({ setId }) {
   } = useQuery({
     queryKey: ["types", setId],
     queryFn: () => fetchUniqueTypes(setId),
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   if (isLoading) return <Skeleton className="w-[140px] h-9 bg-secondary" />;
