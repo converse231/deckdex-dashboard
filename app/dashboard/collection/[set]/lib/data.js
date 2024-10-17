@@ -25,7 +25,15 @@ export const fetchSetById = async (setId) => {
   }
 };
 
-export const fetchCards = async (setId, subtype, rarity, type, sort, order) => {
+export const fetchCards = async (
+  setId,
+  subtype,
+  rarity,
+  type,
+  sort,
+  order,
+  search
+) => {
   try {
     // Construct the base query string
     let query = `q=set.id:"${setId}"`;
@@ -43,6 +51,12 @@ export const fetchCards = async (setId, subtype, rarity, type, sort, order) => {
     if (type && type.toLowerCase() !== "all") {
       const formattedType = type.toLowerCase().replace(/ /g, "+");
       query += `+types:"${formattedType}"`;
+    }
+
+    // Add search parameter
+    if (search && search.trim() !== "") {
+      const formattedSearch = search.trim().replace(/ /g, "+");
+      query += `+name:"*${formattedSearch}*"`;
     }
 
     // Add sorting parameters

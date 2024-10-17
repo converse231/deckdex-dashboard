@@ -13,6 +13,7 @@ import TypeDropdown from "./components/TypeDropdown";
 import SortByButton from "./components/SortByButton";
 import ResetFiltersButton from "./components/ResetFiltersButton";
 import ClearViewToggle from "./components/ClearViewToggle";
+import CardSearchInput from "./components/CardSearchInput";
 
 async function SetPage({ params, searchParams }) {
   const setId = params.set || "Stellar Crown";
@@ -23,8 +24,17 @@ async function SetPage({ params, searchParams }) {
   const sort = searchParams.sort || null;
   const order = searchParams.order || null;
   const sets = COLLECTIONS[0].sets;
+  const search = searchParams.search || "";
   const set = await fetchSetById(setId);
-  const cards = await fetchCards(setId, subType, rarity, type, sort, order);
+  const cards = await fetchCards(
+    setId,
+    subType,
+    rarity,
+    type,
+    sort,
+    order,
+    search
+  );
 
   return (
     <div className="flex flex-col gap-6 sm:gap-8 md:gap-10">
@@ -72,6 +82,7 @@ async function SetPage({ params, searchParams }) {
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-2">
         <div className="flex flex-wrap gap-2 items-center">
+          <CardSearchInput />
           <TypeDropdown setId={setId} />
           <SubtypeDropdown setId={setId} />
           <RarityDropdown setId={setId} />
