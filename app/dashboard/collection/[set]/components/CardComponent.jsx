@@ -50,7 +50,7 @@ export default function CardComponent({ card }) {
       <motion.div
         className="absolute flex flex-col items-center justify-between gap-1 sm:gap-8 h-full py-4 sm:py-6 right-1 sm:right-2 top-0"
         variants={{
-          hidden: { opacity: 0, x: 20 },
+          hidden: { opacity: 1, x: 0 }, // Changed to always be visible
           visible: { opacity: 1, x: 0 },
         }}
         transition={{ duration: 0.2 }}
