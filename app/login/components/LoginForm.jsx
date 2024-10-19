@@ -19,20 +19,26 @@ function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-sm flex flex-col gap-6"
+      className="w-full max-w-sm flex flex-col gap-4 z-50"
     >
       <div className="flex flex-col gap-1 w-full">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className="text-muted-foreground text-sm">
+          Email address
+        </label>
         <Input
           type="email"
           id="email"
           name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="bg-secondary w-full"
         />
       </div>
       <div className="flex flex-col gap-1 w-full">
         <div className="flex justify-between">
-          <label htmlFor="email">Password</label>
+          <label htmlFor="email" className="text-muted-foreground text-sm">
+            Password
+          </label>
           <Link
             href="#"
             className="text-sm text-primary hover:underline font-bold"
@@ -45,6 +51,8 @@ function LoginForm() {
             type={isVisible ? "text" : "password"}
             id="password"
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="bg-secondary w-full"
           />
           <Button
