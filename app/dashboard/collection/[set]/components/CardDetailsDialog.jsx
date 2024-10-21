@@ -30,6 +30,8 @@ import typeNormal from "@/assets/pokemon-types/type-normal.png";
 import typePoison from "@/assets/pokemon-types/type-poison.png";
 import typeRock from "@/assets/pokemon-types/type-rock.png";
 import CardDetailItem from "./CardDetailItem";
+import { useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const getRarityStars = (rarity) => {
   switch (rarity) {
@@ -110,6 +112,7 @@ const typeImages = {
 };
 
 function CardDetailsDialog({ card }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const starCount = getRarityStars(card.rarity);
 
   // Motion values for 3D effect
@@ -141,13 +144,16 @@ function CardDetailsDialog({ card }) {
       <DialogContent className="bg-transparent border-none p-4 sm:p-6 max-w-[95vw] sm:max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[60vw] max-h-[90vh] overflow-y-auto lg:overflow-y-hidden">
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 h-full">
           <motion.div
-            className="perspective-700 w-full sm:w-1/2 aspect-[1/1.4] grid place-items-center"
+            className="perspective-700 w-full sm:w-1/2 aspect-[1/1.4] grid place-items-center relative"
             style={{
               perspective: 700,
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
+            {!imageLoaded && (
+              <Skeleton className="w-full h-full absolute inset-0" />
+            )}
             <motion.div
               className="w-full h-full"
               style={{
@@ -161,7 +167,10 @@ function CardDetailsDialog({ card }) {
                 alt={card.name}
                 width={400}
                 height={560}
-                className="w-full h-full object-contain"
+                className={`w-full h-full object-contain transition-opacity duration-300 ${
+                  imageLoaded ? "opacity-100" : "opacity-0"
+                }`}
+                onLoad={() => setImageLoaded(true)}
               />
             </motion.div>
           </motion.div>
