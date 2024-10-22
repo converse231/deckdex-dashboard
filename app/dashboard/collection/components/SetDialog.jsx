@@ -72,7 +72,7 @@ function SetDialog() {
             {isError && <p>Error loading sets. Please try again.</p>}
             {filteredSets.map((set) => (
               <Link
-                href={`/dashboard/collection/${set.id}`}
+                href={`/dashboard/collection/pokemon/${set.id}`}
                 key={set.id}
                 className="hover:bg-muted p-2 transition-all rounded-lg"
               >

@@ -96,7 +96,8 @@ const typeImages = {
   Fire: typeFire,
   Water: typeWater,
   Grass: typeGrass,
-  Electric: typeElectric, // Changed from Lightning to Electric
+  Electric: typeElectric, // Changed from Lightning to Electric,
+  Lightning: typeElectric,
   Psychic: typePsychic,
   Fighting: typeFighting,
   Steel: typeSteel, // Changed from Metal to Steel
@@ -194,7 +195,7 @@ function CardDetailsDialog({ card }) {
                 {card.types && (
                   <CardDetailItem label="Type(s)">
                     <div className="flex gap-1">
-                      {card.types.map((type) => (
+                      {card.types.map((type, index) => (
                         <Image
                           key={type}
                           src={typeImages[type]}

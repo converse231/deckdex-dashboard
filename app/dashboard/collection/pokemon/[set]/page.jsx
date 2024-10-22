@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import SetDialog from "../components/SetDialog";
+import SetDialog from "../../components/SetDialog";
 import { COLLECTIONS } from "@/lib/constants";
 import CardFeed from "./components/CardFeed";
 import CollectionStatus from "./components/CollectionStatus";
@@ -87,9 +87,11 @@ async function SetPage({ params, searchParams }) {
           <SubtypeDropdown setId={setId} />
           <RarityDropdown setId={setId} />
           <ResetFiltersButton />
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+          <SortByButton />
           <ClearViewToggle />
         </div>
-        <SortByButton />
       </div>
       <CardFeed cards={cards} />
     </div>

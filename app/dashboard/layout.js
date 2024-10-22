@@ -11,7 +11,6 @@ function layout({ children }) {
       <SidebarProvider>
         <AppSidebar />
         <main className="mx-auto w-full">
-          <SidebarTrigger />
           <section className="bg-background md:mt-16 mt-12 lg:mt-0 md:px-10 px-5 py-12 min-h-screen">
             {children}
             <Toaster />
